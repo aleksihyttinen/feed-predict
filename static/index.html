@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Seuraava syöttö</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent: #315c4c;
+            --accent-hover: #284d40;
+            --accent-light: #edf3f0;
+
+            --background: #f6f7f6;
+            --card: #ffffff;
+
+            --text: #252827;
+            --muted: #747a77;
+
+            --border: #e1e5e2;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                sans-serif;
+
+            background: var(--background);
+            color: var(--text);
+        }
+
+        .app {
+            width: min(520px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 48px 0 40px;
+        }
+
+        header {
+            margin-bottom: 28px;
+        }
+
+        h1 {
+            margin: 0;
+
+            font-size: 32px;
+            font-weight: 650;
+            letter-spacing: -0.03em;
+        }
+
+        .subtitle {
+            margin: 7px 0 0;
+
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.035);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /*
+         * Main time input
+         */
+
+        .time-input {
+            width: 100%;
+            height: 64px;
+            padding: 0 16px;
+
+            border: 1px solid #d5dbd7;
+            border-radius: 12px;
+
+            background: white;
+            color: var(--text);
+
+            font: inherit;
+            font-size: 30px;
+            font-weight: 600;
+
+            text-align: center;
+
+            cursor: pointer;
+        }
+
+        .time-input:focus {
+            outline: none;
+
+            border-color: var(--accent);
+
+            box-shadow:
+                0 0 0 3px rgba(49, 92, 76, 0.12);
+        }
+
+        /*
+         * Optional date
+         */
+
+        .date-section {
+            margin-top: 18px;
+        }
+
+        .date-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 8px;
+        }
+
+        .date-label-text {
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .today-button {
+            padding: 0;
+
+            border: none;
+            background: transparent;
+
+            color: var(--accent);
+
+            font: inherit;
+            font-size: 13px;
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .today-button:hover {
+            text-decoration: underline;
+        }
+
+        .date-input {
+            width: 100%;
+            height: 44px;
+            padding: 0 12px;
+
+            border: 1px solid #d5dbd7;
+            border-radius: 9px;
+
+            background: white;
+            color: var(--text);
+
+            font: inherit;
+            font-size: 15px;
+        }
+
+        .date-input:focus {
+            outline: none;
+
+            border-color: var(--accent);
+
+            box-shadow:
+                0 0 0 3px rgba(49, 92, 76, 0.10);
+        }
+
+        /*
+         * Prediction button
+         */
+
+        .predict-button {
+            width: 100%;
+            height: 48px;
+            margin-top: 20px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: var(--accent);
+            color: white;
+
+            font: inherit;
+            font-size: 16px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                background 0.15s ease,
+                transform 0.1s ease;
+        }
+
+        .predict-button:hover {
+            background: var(--accent-hover);
+        }
+
+        .predict-button:active {
+            transform: translateY(1px);
+        }
+
+        /*
+         * Result
+         */
+
+        .result {
+            display: none;
+
+            margin-top: 24px;
+            padding-top: 24px;
+
+            border-top: 1px solid #eee;
+
+            text-align: center;
+        }
+
+        .result.visible {
+            display: block;
+        }
+
+        .result-label {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .result-time {
+            margin-top: 6px;
+
+            color: var(--accent);
+
+            font-size: 30px;
+            font-weight: 650;
+            letter-spacing: -0.03em;
+        }
+
+        .result-detail {
+            margin-top: 5px;
+
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /*
+         * About
+         */
+
+        .about {
+            margin-top: 16px;
+            padding: 20px 24px;
+        }
+
+        .about summary {
+            cursor: pointer;
+
+            color: #555b58;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .about p {
+            margin: 14px 0 0;
+
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .about strong {
+            color: #555b58;
+        }
+
+        footer {
+            margin-top: 24px;
+
+            text-align: center;
+
+            color: #a0a6a2;
+            font-size: 12px;
+        }
+
+        /*
+         * Mobile
+         */
+
+        @media (max-width: 480px) {
+            .app {
+                padding-top: 32px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .time-input {
+                height: 60px;
+                font-size: 28px;
+            }
+
+            .result-time {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app">
+
+        <header>
+            <h1>Seuraava syöttö</h1>
+
+            <p class="subtitle">
+                Milloin seuraava syöttö on todennäköisesti?
+            </p>
+        </header>
+
+
+        <main>
+
+            <section class="card">
+
+                <!-- Main input: TIME -->
+
+                <label for="lastFeedTime">
+                    Viimeisin syöttö
+                </label>
+                <input id="lastFeedTime" class="time-input" type="time">
+
+
+                <!-- Optional date -->
+
+                <div class="date-section">
+
+                    <div class="date-label">
+
+                        <div class="date-label-text">
+                            Päivämäärä
+                        </div>
+                        <button type="button" class="today-button" onclick="setToday()">
+                            Tänään
+                        </button>
+
+                    </div>
+
+                    <input id="lastFeedDate" class="date-input" type="date">
+
+                </div>
+
+
+                <!-- Predict -->
+
+                <button type="button" class="predict-button" onclick="predict()">
+                    Ennusta seuraava syöttö
+                </button>
+
+
+                <!-- Result -->
+
+                <div class="result" id="result">
+
+                    <div class="result-label">
+                        Arvioitu seuraava syöttö
+                    </div>
+
+                    <div class="result-time" id="resultTime"></div>
+
+                    <div class="result-detail" id="resultMinutes"></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ML information -->
+
+            <details class="card about">
+
+                <summary>
+                    Tietoa sovelluksesta
+                </summary>
+
+                <p>
+                    Tämä sovellus käyttää koneoppimismallia,
+                    joka on opetettu aiempien syöttötietojen perusteella.
+                </p>
+
+                <p>
+                    Malli on
+                    <strong>Gradient Boosting Regressor</strong>,
+                    joka on opetettu Pythonilla ja scikit-learnilla.
+                    Se käyttää kellonaikaa ja viikonpäivää arvioidakseen,
+                    kuinka kauan seuraavaan syöttöön kuluu.
+                </p>
+
+                <p>
+                    Aiemmin näkemättömällä datalla mallin keskimääräinen
+                    virhe on noin <strong>50 minuuttia</strong>.
+                </p>
+
+            </details>
+
+        </main>
+
+
+        <footer>
+            Arvio, ei aikataulu.
+            </br>
+            </br>
+            © 2026 Aleksi Hyttinen
+        </footer>
+
+    </div>
+
+
+    <script>
+
+        /*
+         * Format a Date as YYYY-MM-DD
+         */
+        function formatDate(date) {
+
+            const year = date.getFullYear();
+
+            const month = String(
+                date.getMonth() + 1
+            ).padStart(2, "0");
+
+            const day = String(
+                date.getDate()
+            ).padStart(2, "0");
+
+            return `${year}-${month}-${day}`;
+        }
+
+
+        /*
+         * Format a Date as HH:MM
+         */
+        function formatTime(date) {
+
+            const hours = String(
+                date.getHours()
+            ).padStart(2, "0");
+
+            const minutes = String(
+                date.getMinutes()
+            ).padStart(2, "0");
+
+            return `${hours}:${minutes}`;
+        }
+
+
+        /*
+         * Set both inputs to the current date/time.
+         */
+        function setDefaults() {
+
+            const now = new Date();
+
+            document.getElementById(
+                "lastFeedDate"
+            ).value = formatDate(now);
+
+            document.getElementById(
+                "lastFeedTime"
+            ).value = formatTime(now);
+        }
+
+
+        /*
+         * Reset date to today.
+         */
+        function setToday() {
+
+            document.getElementById(
+                "lastFeedDate"
+            ).value = formatDate(new Date());
+        }
+
+
+        /*
+         * Make sure the inputs have sensible defaults
+         * when the page opens.
+         */
+        setDefaults();
+
+
+        /*
+         * Send prediction request to FastAPI.
+         */
+        async function predict() {
+
+            const timeInput =
+                document.getElementById("lastFeedTime");
+
+            const dateInput =
+                document.getElementById("lastFeedDate");
+
+            const result =
+                document.getElementById("result");
+
+
+            if (!timeInput.value) {
+                alert("Anna viimeisimmän syötön kellonaika.");
+                return;
+            }
+
+
+            if (!dateInput.value) {
+                alert("Valitse päivämäärä.");
+                return;
+            }
+
+
+            /*
+             * Combine date + time into one local datetime.
+             *
+             * Example:
+             * 2026-10-07 + 01:00
+             * → 2026-10-07T01:00
+             */
+            const lastFeed =
+                `${dateInput.value}T${timeInput.value}`;
+
+
+            try {
+
+                const response = await fetch(
+                    "/predict",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            last_feed: lastFeed
+                        })
+                    }
+                );
+
+
+                if (!response.ok) {
+                    throw new Error(
+                        "Prediction failed"
+                    );
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                /*
+                 * FastAPI returns an ISO timestamp.
+                 */
+                const nextFeed =
+                    new Date(
+                        data.predicted_next_feed
+                    );
+
+
+                /*
+                 * Display a friendly date/time.
+                 */
+                document.getElementById(
+                    "resultTime"
+                ).textContent =
+                    nextFeed.toLocaleString(
+                        [],
+                        {
+                            weekday: "short",
+                            month: "short",
+                            day: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit"
+                        }
+                    );
+
+
+                document.getElementById(
+                    "resultMinutes"
+                ).textContent =
+                    `Noin ${Math.round(
+                        data.predicted_minutes
+                    )} minuuttia viimeisimmästä syötöstä`
+
+
+                result.classList.add(
+                    "visible"
+                );
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert("Ennusteen hakeminen epäonnistui. Yritä uudelleen.");
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

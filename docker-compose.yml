@@ -1,0 +1,11 @@
+services:
+  feed-predict:
+    build: .
+    restart: unless-stopped
+
+    networks:
+      - web
+
+networks:
+  web:
+    external: true

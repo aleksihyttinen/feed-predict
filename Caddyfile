@@ -1,0 +1,3 @@
+predict.leksi.dev {
+    reverse_proxy feed-predict:8000
+}
