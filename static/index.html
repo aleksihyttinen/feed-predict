@@ -29,14 +29,12 @@
         body {
             margin: 0;
             min-height: 100vh;
-
             font-family:
                 -apple-system,
                 BlinkMacSystemFont,
                 "Segoe UI",
                 Roboto,
                 sans-serif;
-
             background: var(--background);
             color: var(--text);
         }
@@ -53,7 +51,6 @@
 
         h1 {
             margin: 0;
-
             font-size: 32px;
             font-weight: 650;
             letter-spacing: -0.03em;
@@ -61,7 +58,6 @@
 
         .subtitle {
             margin: 7px 0 0;
-
             color: var(--muted);
             font-size: 15px;
         }
@@ -71,55 +67,47 @@
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 24px;
-
-            box-shadow:
-                0 4px 20px rgba(0, 0, 0, 0.035);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.035);
         }
 
         label {
             display: block;
             margin-bottom: 8px;
-
             font-size: 14px;
             font-weight: 600;
         }
 
-        /*
-         * Main time input
-         */
+        input {
+            font-family: inherit;
+        }
+
+        /* Prediction time input */
 
         .time-input {
             width: 100%;
             height: 64px;
             padding: 0 16px;
-
             border: 1px solid #d5dbd7;
             border-radius: 12px;
-
             background: white;
             color: var(--text);
-
             font: inherit;
             font-size: 30px;
             font-weight: 600;
-
             text-align: center;
-
             cursor: pointer;
         }
 
-        .time-input:focus {
+        .time-input:focus,
+        .date-input:focus,
+        .admin-input:focus,
+        .file-input:focus {
             outline: none;
-
             border-color: var(--accent);
-
-            box-shadow:
-                0 0 0 3px rgba(49, 92, 76, 0.12);
+            box-shadow: 0 0 0 3px rgba(49, 92, 76, 0.12);
         }
 
-        /*
-         * Optional date
-         */
+        /* Date */
 
         .date-section {
             margin-top: 18px;
@@ -129,7 +117,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-
             margin-bottom: 8px;
         }
 
@@ -141,16 +128,12 @@
 
         .today-button {
             padding: 0;
-
             border: none;
             background: transparent;
-
             color: var(--accent);
-
             font: inherit;
             font-size: 13px;
             font-weight: 600;
-
             cursor: pointer;
         }
 
@@ -162,72 +145,56 @@
             width: 100%;
             height: 44px;
             padding: 0 12px;
-
             border: 1px solid #d5dbd7;
             border-radius: 9px;
-
             background: white;
             color: var(--text);
-
             font: inherit;
             font-size: 15px;
         }
 
-        .date-input:focus {
-            outline: none;
+        /* Buttons */
 
-            border-color: var(--accent);
-
-            box-shadow:
-                0 0 0 3px rgba(49, 92, 76, 0.10);
-        }
-
-        /*
-         * Prediction button
-         */
-
-        .predict-button {
+        .predict-button,
+        .admin-button {
             width: 100%;
-            height: 48px;
+            min-height: 48px;
             margin-top: 20px;
-
+            padding: 12px;
             border: none;
             border-radius: 10px;
-
             background: var(--accent);
             color: white;
-
             font: inherit;
             font-size: 16px;
             font-weight: 600;
-
             cursor: pointer;
-
-            transition:
-                background 0.15s ease,
-                transform 0.1s ease;
+            transition: background 0.15s ease, transform 0.1s ease;
         }
 
-        .predict-button:hover {
+        .predict-button:hover,
+        .admin-button:hover {
             background: var(--accent-hover);
         }
 
-        .predict-button:active {
+        .predict-button:active,
+        .admin-button:active {
             transform: translateY(1px);
         }
 
-        /*
-         * Result
-         */
+        .predict-button:disabled,
+        .admin-button:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
+        /* Prediction result */
 
         .result {
             display: none;
-
             margin-top: 24px;
             padding-top: 24px;
-
             border-top: 1px solid #eee;
-
             text-align: center;
         }
 
@@ -242,9 +209,7 @@
 
         .result-time {
             margin-top: 6px;
-
             color: var(--accent);
-
             font-size: 30px;
             font-weight: 650;
             letter-spacing: -0.03em;
@@ -252,52 +217,95 @@
 
         .result-detail {
             margin-top: 5px;
-
             color: var(--muted);
             font-size: 14px;
         }
 
-        /*
-         * About
-         */
 
-        .about {
+        /* About and Admin */
+
+        .about,
+        .admin-section {
             margin-top: 16px;
             padding: 20px 24px;
         }
 
-        .about summary {
+        .about summary,
+        .admin-section summary {
             cursor: pointer;
-
             color: #555b58;
             font-size: 14px;
             font-weight: 600;
         }
 
-        .about p {
+        .about p,
+        .admin-content p {
             margin: 14px 0 0;
-
             color: var(--muted);
             font-size: 14px;
             line-height: 1.6;
         }
 
-        .about strong {
+        .about strong,
+        .admin-content strong {
             color: #555b58;
+        }
+
+        .admin-content ol {
+            margin: 10px 0 0;
+            padding-left: 22px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .admin-field {
+            margin-top: 16px;
+        }
+
+        .admin-field label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+
+        /* Admin status message */
+
+        .admin-status {
+            display: none;
+            margin-top: 16px;
+            padding: 14px 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            line-height: 1.7;
+            white-space: pre-line;
+            overflow-wrap: anywhere;
+        }
+
+        .admin-status.visible {
+            display: block;
+        }
+
+        .admin-status.success {
+            background: var(--accent-light);
+            color: var(--accent);
+            border: 1px solid #d5e4dc;
+        }
+
+        .admin-status.error {
+            background: #faf0ef;
+            color: #a33b32;
+            border: 1px solid #efd8d5;
         }
 
         footer {
             margin-top: 24px;
-
             text-align: center;
-
             color: #a0a6a2;
             font-size: 12px;
         }
-
-        /*
-         * Mobile
-         */
 
         @media (max-width: 480px) {
             .app {
@@ -325,58 +333,46 @@
 </head>
 
 <body>
-
     <div class="app">
 
         <header>
             <h1>Seuraava syöttö</h1>
-
             <p class="subtitle">
                 Milloin seuraava syöttö on todennäköisesti?
             </p>
         </header>
 
-
         <main>
 
-            <section class="card">
+            <!-- Prediction form -->
 
-                <!-- Main input: TIME -->
+            <section class="card">
 
                 <label for="lastFeedTime">
                     Viimeisin syöttö
                 </label>
-                <input id="lastFeedTime" class="time-input" type="time">
 
-
-                <!-- Optional date -->
+                <input id="lastFeedTime" class="time-input" type="time" required>
 
                 <div class="date-section">
 
                     <div class="date-label">
-
                         <div class="date-label-text">
                             Päivämäärä
                         </div>
+
                         <button type="button" class="today-button" onclick="setToday()">
                             Tänään
                         </button>
-
                     </div>
 
-                    <input id="lastFeedDate" class="date-input" type="date">
+                    <input id="lastFeedDate" class="date-input" type="date" required>
 
                 </div>
 
-
-                <!-- Predict -->
-
-                <button type="button" class="predict-button" onclick="predict()">
+                <button type="button" class="predict-button" id="predictButton" onclick="predict()">
                     Ennusta seuraava syöttö
                 </button>
-
-
-                <!-- Result -->
 
                 <div class="result" id="result">
 
@@ -392,14 +388,11 @@
 
             </section>
 
-
-            <!-- ML information -->
+            <!-- Model information -->
 
             <details class="card about">
 
-                <summary>
-                    Tietoa sovelluksesta
-                </summary>
+                <summary>Tietoa sovelluksesta</summary>
 
                 <p>
                     Tämä sovellus käyttää koneoppimismallia,
@@ -421,26 +414,65 @@
 
             </details>
 
-        </main>
+            <!-- Password-protected model retraining -->
 
+            <details class="card admin-section">
+                <summary>Ylläpito</summary>
+
+                <div class="admin-content">
+                    <p>
+                        Tällä toiminnolla voit kouluttaa ennustemallin uudelleen
+                        lataamalla Huckleberry-sovelluksesta viedyn CSV-tiedoston.
+                    </p>
+
+                    <p><strong>Ohjeet:</strong></p>
+                    <ol>
+                        <li>Vie ruokintatiedot CSV-tiedostona Huckleberry-sovelluksesta.</li>
+                        <li>Valitse viety CSV-tiedosto.</li>
+                        <li>Syötä ylläpidon salasana.</li>
+                        <li>Paina ”Kouluta malli uudelleen” ja odota, että koulutus valmistuu.</li>
+                    </ol>
+
+                    <p>
+                        Uusi malli korvaa aiemman mallin, kun koulutus onnistuu.
+                    </p>
+
+                    <form id="retrainForm">
+                        <div class="admin-field">
+                            <label for="adminPassword">Salasana</label>
+                            <input type="password" id="adminPassword" class="admin-input" placeholder="Syötä salasana"
+                                autocomplete="current-password" required>
+                        </div>
+
+                        <div class="admin-field">
+                            <label for="trainingCsv">CSV-tiedosto</label>
+                            <input type="file" id="trainingCsv" class="file-input" accept=".csv,text/csv" required>
+                        </div>
+
+                        <button type="submit" id="retrainButton" class="admin-button">
+                            Kouluta malli uudelleen
+                        </button>
+
+                        <div id="retrainStatus" class="admin-status" role="status" aria-live="polite"></div>
+                    </form>
+                </div>
+            </details>
+
+        </main>
 
         <footer>
             Arvio, ei aikataulu.
-            </br>
-            </br>
+            <br><br>
             © 2026 Aleksi Hyttinen
         </footer>
 
     </div>
 
-
     <script>
-
         /*
-         * Format a Date as YYYY-MM-DD
+         * Format a Date as YYYY-MM-DD.
          */
         function formatDate(date) {
-
             const year = date.getFullYear();
 
             const month = String(
@@ -454,12 +486,10 @@
             return `${year}-${month}-${day}`;
         }
 
-
         /*
-         * Format a Date as HH:MM
+         * Format a Date as HH:MM.
          */
         function formatTime(date) {
-
             const hours = String(
                 date.getHours()
             ).padStart(2, "0");
@@ -471,12 +501,10 @@
             return `${hours}:${minutes}`;
         }
 
-
         /*
-         * Set both inputs to the current date/time.
+         * Set default date and time.
          */
         function setDefaults() {
-
             const now = new Date();
 
             document.getElementById(
@@ -488,30 +516,21 @@
             ).value = formatTime(now);
         }
 
-
         /*
          * Reset date to today.
          */
         function setToday() {
-
             document.getElementById(
                 "lastFeedDate"
             ).value = formatDate(new Date());
         }
 
-
-        /*
-         * Make sure the inputs have sensible defaults
-         * when the page opens.
-         */
         setDefaults();
-
 
         /*
          * Send prediction request to FastAPI.
          */
         async function predict() {
-
             const timeInput =
                 document.getElementById("lastFeedTime");
 
@@ -521,106 +540,220 @@
             const result =
                 document.getElementById("result");
 
+            const button =
+                document.getElementById("predictButton");
 
             if (!timeInput.value) {
                 alert("Anna viimeisimmän syötön kellonaika.");
                 return;
             }
 
-
             if (!dateInput.value) {
                 alert("Valitse päivämäärä.");
                 return;
             }
 
-
-            /*
-             * Combine date + time into one local datetime.
-             *
-             * Example:
-             * 2026-10-07 + 01:00
-             * → 2026-10-07T01:00
-             */
             const lastFeed =
                 `${dateInput.value}T${timeInput.value}`;
 
+            button.disabled = true;
 
             try {
-
-                const response = await fetch(
-                    "/predict",
-                    {
-                        method: "POST",
-
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-
-                        body: JSON.stringify({
-                            last_feed: lastFeed
-                        })
-                    }
-                );
-
+                const response = await fetch("/predict", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        last_feed: lastFeed
+                    })
+                });
 
                 if (!response.ok) {
-                    throw new Error(
-                        "Prediction failed"
-                    );
+                    throw new Error("Prediction failed");
                 }
 
+                const data = await response.json();
 
-                const data =
-                    await response.json();
+                const nextFeed = new Date(
+                    data.predicted_next_feed
+                );
 
-
-                /*
-                 * FastAPI returns an ISO timestamp.
-                 */
-                const nextFeed =
-                    new Date(
-                        data.predicted_next_feed
-                    );
-
-
-                /*
-                 * Display a friendly date/time.
-                 */
                 document.getElementById(
                     "resultTime"
-                ).textContent =
-                    nextFeed.toLocaleString(
-                        [],
-                        {
-                            weekday: "short",
-                            month: "short",
-                            day: "numeric",
-                            hour: "2-digit",
-                            minute: "2-digit"
-                        }
-                    );
-
+                ).textContent = nextFeed.toLocaleString(
+                    [],
+                    {
+                        weekday: "short",
+                        month: "short",
+                        day: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit"
+                    }
+                );
 
                 document.getElementById(
                     "resultMinutes"
                 ).textContent =
                     `Noin ${Math.round(
                         data.predicted_minutes
-                    )} minuuttia viimeisimmästä syötöstä`
+                    )} minuuttia viimeisimmästä syötöstä`;
 
-
-                result.classList.add(
-                    "visible"
-                );
+                result.classList.add("visible");
 
             } catch (error) {
-
                 console.error(error);
-
-                alert("Ennusteen hakeminen epäonnistui. Yritä uudelleen.");
+                alert(
+                    "Ennusteen hakeminen epäonnistui. Yritä uudelleen."
+                );
+            } finally {
+                button.disabled = false;
             }
         }
 
+        /*
+         * Show upload status.
+         */
+        function setRetrainStatus(message, type = "") {
+            const status =
+                document.getElementById("retrainStatus");
+
+            status.textContent = message;
+            status.className = "admin-status visible";
+
+            if (type) {
+                status.classList.add(type);
+            }
+        }
+
+        /*
+         * Upload CSV and request model retraining.
+         *
+         * The password is sent to FastAPI for server-side
+         * verification. It is not stored in this HTML.
+         */
+        document
+            .getElementById("retrainForm")
+            .addEventListener("submit", async function (event) {
+                event.preventDefault();
+
+                const passwordInput =
+                    document.getElementById("adminPassword");
+
+                const fileInput =
+                    document.getElementById("trainingCsv");
+
+                const button =
+                    document.getElementById("retrainButton");
+
+                const file = fileInput.files[0];
+                const password = passwordInput.value;
+
+                if (!password) {
+                    setRetrainStatus(
+                        "Anna ylläpidon salasana.",
+                        "error"
+                    );
+                    return;
+                }
+
+                if (!file || !file.name.toLowerCase().endsWith(".csv")) {
+                    setRetrainStatus(
+                        "Valitse kelvollinen CSV-tiedosto.",
+                        "error"
+                    );
+                    return;
+                }
+
+                button.disabled = true;
+                button.textContent = "Koulutetaan mallia...";
+
+                setRetrainStatus(
+                    "CSV lähetetään palvelimelle. " +
+                    "Koulutus voi kestää useita minuutteja."
+                );
+
+                try {
+                    const formData = new FormData();
+                    formData.append("file", file);
+
+                    const response = await fetch("/retrain", {
+                        method: "POST",
+                        headers: {
+                            "Authorization": `Bearer ${password}`
+                        },
+                        body: formData
+                    });
+
+                    const responseText = await response.text();
+
+                    let data;
+
+                    try {
+                        data = JSON.parse(responseText);
+                    } catch {
+                        throw new Error(
+                            "Palvelin palautti virheellisen vastauksen."
+                        );
+                    }
+
+                    if (!response.ok) {
+                        if (response.status === 401 ||
+                            response.status === 403) {
+                            throw new Error(
+                                "Virheellinen salasana tai käyttö estetty."
+                            );
+                        }
+
+                        throw new Error(
+                            data.detail ||
+                            "Mallin koulutus epäonnistui."
+                        );
+                    }
+
+                    const lines = [
+                        "Malli koulutettu onnistuneesti!"
+                    ];
+
+                    if (data.training_rows !== undefined) {
+                        lines.push(
+                            `Koulutusrivejä: ${data.training_rows}`
+                        );
+                    }
+
+                    if (data.model_type) {
+                        lines.push(`Malli: ${data.model_type}`);
+                    }
+
+                    if (data.model_file) {
+                        lines.push(`Tallennettu: ${data.model_file}`);
+                    }
+
+                    if (data.message) {
+                        lines.push("Malli on koulutettu kaikella käytettävissä olevalla datalla.");
+                    }
+
+                    setRetrainStatus(
+                        lines.join("\n"),
+                        "success"
+                    );
+
+                    fileInput.value = "";
+                    passwordInput.value = "";
+
+                } catch (error) {
+                    console.error(error);
+
+                    setRetrainStatus(
+                        `Virhe: ${error.message}`,
+                        "error"
+                    );
+
+                } finally {
+                    button.disabled = false;
+                    button.textContent = "Kouluta malli uudelleen";
+                }
+            });
     </script>
 
 </body>
