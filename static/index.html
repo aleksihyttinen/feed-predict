@@ -329,6 +329,61 @@
                 font-size: 27px;
             }
         }
+        /* Fix native date/time inputs overflowing on iOS Safari */
+        input,
+        button,
+        select,
+        textarea {
+            box-sizing: border-box;
+            max-width: 100%;
+        }
+        
+        .time-input,
+        .date-input {
+            display: block;
+            width: 100%;
+            min-width: 0;
+            max-width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        
+        .time-input {
+            height: 64px;
+        }
+        
+        .date-input {
+            height: 44px;
+        }
+        
+        /* Prevent flex children from forcing their parent wider */
+        .date-label,
+        .date-label-text {
+            min-width: 0;
+        }
+        
+        .app,
+        main,
+        .card {
+            min-width: 0;
+            max-width: 100%;
+        }
+        
+        body {
+            overflow-x: hidden;
+        }
+        
+        @supports (width: 100dvw) {
+            body {
+                min-height: 100dvh;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .time-input {
+                height: 60px;
+            }
+        }
     </style>
 </head>
 
